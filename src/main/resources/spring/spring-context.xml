@@ -22,7 +22,7 @@
 	">
 
 	<!-- 启用spring扫描 -->
-	<context:component-scan base-package="xyz.javanew" />
+	<context:component-scan base-package="com.expert" />
 	<!-- 启用spring注解 -->
 	<context:annotation-config />
 
@@ -44,7 +44,7 @@
 	<task:annotation-driven executor="executor"
 		scheduler="scheduler" />
 
-	<bean id="SpringContextUtil" class="xyz.javanew.util.SpringContextUtil" />
+	<bean id="SpringContextUtil" class="com.expert.util.SpringContextUtil" />
 	
 	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
 </beans>

@@ -22,6 +22,6 @@
 		<constructor-arg name="mongoDbFactory" ref="mongoFactory" />
 	</bean>
 
-	<mongo:repositories base-package="xyz.javanew.repository.mongodb" />
+	<mongo:repositories base-package="com.expert.repository.mongodb" />
 
 </beans>

@@ -9,7 +9,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="" href="/"><img alt="主页" src="/img/logo.jpg" /></a>
+				<a class="" href="/"><img alt="主页" src="/img/logo.jpg" height="50px" /></a><label>老司机带带我</label>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,10 +32,33 @@
 						</span>
 					</div>
 				</form>
-				<select class="form-control" style="height: 34px;width: 100px;margin-top: 8px;" onchange="changeLanguage(this.value);" onpropertychange="changeLanguage(this.value);">
-					<option value="zh" th:selected="${'zh' eq language ? 'true' : 'false'}" selected="false">[[#{language.chinese}]]</option>
-					<option value="en" th:selected="${'en' eq language ? 'true' : 'false'}" selected="false">[[#{language.english}]]</option>
-				</select>
+				<ul class="nav navbar-nav navbar-right">
+					<li th:if="${session.username}" class="dropdown user">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span th:text="${session.username}"></span>
+							<i class="glyphicon glyphicon-user"></i>
+						</a>
+						<ul class="dropdown-menu list-group">
+							<li class="list-group-item">
+								<span class="badge"><a href="#" style="color:white;">2</a></span>
+								<i class="glyphicon glyphicon-envelope"></i> My Mail
+							</li>
+							<li class="list-group-item">
+								<span class="badge"><a href="#" style="color:white;">3</a></span>
+								<i class="glyphicon glyphicon-tasks"></i> My Tasks
+							</li>
+							<li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-info-sign"></i> My Info</a></li>
+							<li class="list-group-item"><a href="/user/logout"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+							<li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-cog"></i> Setting</a></li>
+						</ul>
+					</li>
+					<li th:if="not ${session.username}">
+						<a href="/user/login">login</a>
+					</li>
+					<li>
+						<a href="/user/register">register</a>
+					</li>
+				</ul>
 			</div>
 			<a href=""></a>
 			<!-- /.navbar-collapse -->
@@ -52,5 +75,21 @@
 				<a th:href="${subItem.path}" th:utext="${'en' eq language?subItem.nameEn:subItem.nameZh}"></a>
 			</li>
 		</ol>
+	</div>
+</div>
+
+<div th:fragment="m_header">
+	<div class="navbar navbar-default navbar-fixed-top">
+		<ul class="nav nav-tabs">
+			<li><a class="" href="/"><img alt="主页" src="/img/logo.jpg" height="27px" /></a></li>
+			<li th:each="item:${menuList}" th:if="${#lists.isEmpty(item.subMenus)}" th:class="${item.id eq menu}?'active':''"><a th:href="${item.path}" th:utext="${'en' eq language?item.nameEn:item.nameZh}"></a></li>
+			<li th:each="item:${menuList}" th:if="${not #lists.isEmpty(item.subMenus)}" th:class="${item.id eq menu}?'active dropdown':'dropdown'"><a href="#" th:href="${item.path}" class="dropdown-toggle"
+				data-toggle="dropdown" th:utext="${'en' eq language?item.nameEn:item.nameZh}"><span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					<li th:if="${item.hasContent}" th:class="${item.id eq menu and item.id eq subMenu}?'active':''"><a href="#" th:href="${item.path}" th:utext="${'en' eq language?item.nameEn:item.nameZh}"></a></li>
+					<li th:each="subItem:${item.subMenus}" th:class="${subItem.id eq subMenu}?'active':''"><a href="#" th:href="${subItem.path}" th:utext="${'en' eq language?subItem.nameEn:subItem.nameZh}"></a></li>
+				</ul>
+			</li>
+		</ul>
 	</div>
 </div>

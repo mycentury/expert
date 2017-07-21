@@ -1,0 +1,59 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
+<html lang="zh-CN" class="no-js" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>city list</title>
+<!-- <meta name="full-screen" content="yes"> -->
+<!-- <meta name="x5-fullscreen" content="true"> -->
+<div th:include="common/drop/dropcss :: dropcss" th:remove="tag" />
+
+<style type="text/css">
+th {
+	text-align: center;
+}
+</style>
+</head>
+<body th:with="headTitle='城市列表'">
+	<div th:replace="common/header :: header" th:remove="tag" />
+	<div class="content">
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>cname</th>
+					<th>upid</th>
+				</tr>
+			</thead>
+			<tbody class="citylist">
+			</tbody>
+		</table>
+	</div>
+
+	<div th:include="common/drop/dropjs :: dropjs" th:remove="tag" />
+
+	<script th:inline="javascript">
+	var basePath=[[@{/}]];
+	var callback= function(list){
+		var html="";
+  		for (var i = 0; i < list.length; i++) {
+			html+="<tr>"
+			  	+"<td>"+list[i].id+"</td>"
+			 	+"<td>"+list[i].cname+"</td>"
+				+"<td>"+list[i].upid+"</td>"
+				+"</tr>";
+			}
+		return html;
+	}
+	var dropParams={
+			pageNumber : 0,//默认 0
+			limit : 15,//默认15 条一页
+			url : basePath+"city/findCitys",//请求的url地址
+			$dropload:$(".content"),//dropload jquery 元素
+			$e:$(".citylist"),//要显示的数据的 jquery元素
+			callback:callback//回调函数
+	};
+	dropLoadUtil.initDropLoad(dropParams);
+	</script>
+</body>
+
+</html>

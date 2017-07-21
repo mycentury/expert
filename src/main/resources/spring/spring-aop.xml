@@ -21,15 +21,15 @@
 	<aop:aspectj-autoproxy />
 	<aop:config>
 		<aop:aspect ref="methodInterceptor">
-			<aop:pointcut id="before" expression="execution(* xyz.javanew..*.*(..))" />
-			<aop:pointcut id="after" expression="execution(* xyz.javanew..*.*(..))" />
-			<aop:pointcut id="around" expression="execution(* xyz.javanew..*.*(..))" />
-			<aop:pointcut id="after-return" expression="execution(* xyz.javanew..*.*(..))" />
-			<aop:pointcut id="after-throw" expression="execution(* xyz.javanew..*.*(..))" />
+			<aop:pointcut id="before" expression="execution(* com.expert..*.*(..))" />
+			<aop:pointcut id="after" expression="execution(* com.expert..*.*(..))" />
+			<aop:pointcut id="around" expression="execution(* com.expert.service.DaoService.*(..))" />
+			<aop:pointcut id="after-return" expression="execution(* com.expert..*.*(..))" />
+			<aop:pointcut id="after-throw" expression="execution(* com.expert..*.*(..))" />
 			
-			<aop:before method="doBefore" pointcut-ref="before" />
+			<!-- <aop:before method="doBefore" pointcut-ref="before" />
 			<aop:after-returning method="doAfterReturn" pointcut-ref="after-return" />
-			<aop:after method="doAfter" pointcut-ref="after" />
+			<aop:after method="doAfter" pointcut-ref="after" /> -->
 			<aop:around method="doAround" pointcut-ref="around" />
 			<aop:after-throwing method="doAfterThrow" pointcut-ref="after-throw" />
 		</aop:aspect>

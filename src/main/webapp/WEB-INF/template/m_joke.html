@@ -1,0 +1,52 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title th:utext="段子"></title>
+	<meta name="keywords" content="段子" />
+	<meta name="description" content="段子" />
+	<div th:include="/common/meta :: meta" th:remove="tag"></div>
+	<!-- BEGIN CSS_JS -->
+	<div th:include="/common/css_js :: css_js" th:remove="tag"></div>
+	<!-- END CSS_JS -->
+</head>
+<body th:with="menu='HOME'" th:inline="text">
+
+	<!-- BEGIN HEADER -->
+	<div th:include="/common/header :: m_header" th:remove="tag"></div>
+	<!-- END HEADER -->
+	
+	<div class="container">
+		<div th:each="item:${jokes}" style="margin-top: 30px;">
+			<div>
+				<span><a th:href="${item.publisherId}">[[${item.publisherName}]]</a></span>
+				<span>[[${item.publishDate}]]</span>
+			</div>
+			<div style="border: 1px solid ;">
+				[[${item.text}]]
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3">
+				<button class="glyphicon glyphicon-thumbs-up">110</button>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3">
+				<button class="glyphicon glyphicon-thumbs-down">110</button>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3">
+				<button class="glyphicon glyphicon-comment">110</button>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3">
+				<button class="glyphicon glyphicon-share-alt">110</button>
+			</div>
+		</div>
+	</div>
+
+	<div th:include="/common/footer :: m_footer" th:remove="tag"></div>
+	<script type="text/javascript" src="/jquery/qrcode/qrcode.js"></script>
+	<script type="text/javascript" src="/jquery/qrcode/jquery.qrcode.min.js"></script>
+	<script type="text/javascript" src="/js/upload.js"></script>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		/* ]]> */
+	</script>
+</body>
+</html>

@@ -23,7 +23,7 @@
 		</listener>
 		<listener>
 			<listener-class>
-				xyz.javanew.listener.SessionListener
+				com.expert.listener.SessionListener
 			</listener-class>
 		</listener>
 

@@ -1,0 +1,82 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:include="/common/meta :: meta" th:remove="tag"></div>
+	<title>登陆</title>
+</head>
+<body th:inline="text">
+
+	<!-- BEGIN HEADER -->
+	<div th:include="/common/header :: header" th:remove="tag"></div>
+	<!-- END HEADER -->
+	<div class="container">
+		<ol class="breadcrumb">
+			<li><a href="/">Home</a></li>
+			<li><a href="/user/login">Login</a></li>
+		</ol>
+
+		<div class="col-xs-12 col-sm-8 col-md-8"></div>
+		<div class="col-xs-6 col-sm-4 col-md-4">
+			<form method="post" action="/user/user_login" class="form-horizontal form-login">
+				<input type="hidden" name="usertype" th:value="${usertype}" />
+				<input type="hidden" name="token" th:value="${session.token}" />
+				<div class="form-group">
+					<label for="id">用户名：</label>
+					<div class="input-group col-lg-10">
+						<span class="input-group-addon">
+							<i class="glyphicon glyphicon-user"></i>
+						</span>
+						<input id="id" class="form-control" name="id" th:value="${user==null?'':user.id}" maxlength="20" required="required" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="password" >密码：</label>
+					<div class="input-group col-lg-10">
+						<span class="input-group-addon">
+							<i class="glyphicon glyphicon-lock"></i>
+						</span>
+						<input id="password" class="form-control" name="password" th:value="${user==null?'':user.password}" maxlength="20" required="required" type="password" />
+						<span id="switch_eye" class="input-group-addon">
+							<i id="eye" class="glyphicon glyphicon-eye-open"></i>
+						</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="checkcode">验证码：</label>
+					<div class="input-group col-lg-10">
+						<span class="input-group-addon">
+							<i class="glyphicon glyphicon-random"></i>
+						</span>
+						<input id="checkcode" class="form-control" name="checkcode" maxlength="10" required="required" />
+						<span class="input-group-addon">
+							<img id="checkcode_img" title="单击更换" alt="单击更换" src="/checkcode" onclick="refresh_attr(this,'src');" />
+						</span>
+					</div>
+				</div>
+				<div id="info" class="form-group" th:if="${errorMsg != null}" onclick="$(this).hide();">
+					<div class="input-group col-lg-10">
+						<span class="input-group-addon">
+							<i class="glyphicon glyphicon-info-sign"></i>
+						</span>
+						<p class="form-control">[[${errorMsg}]]</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group col-lg-10">
+						<button class="btn-default form-control" type="submit">登录</button>
+						<span class="input-group-addon">
+							<a href="#">忘记密码？</a>
+						</span>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- BEGIN CSS_JS -->
+	<div th:include="/common/css_js :: css_js" th:remove="tag"></div>
+	<!-- END CSS_JS -->
+	<div th:include="/common/footer :: m_footer" th:remove="tag"></div>
+	<script src="/js/switch_eye.js"></script>
+</body>
+</html>

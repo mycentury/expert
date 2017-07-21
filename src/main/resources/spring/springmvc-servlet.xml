@@ -19,7 +19,7 @@
 
 	<!-- 启用spring扫描 -->
 	<!-- 这里必须扫描@Controller -->
-	<context:component-scan base-package="xyz.javanew.controller" />
+	<context:component-scan base-package="com.expert.controller" />
 	<mvc:annotation-driven />
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
     
@@ -29,7 +29,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean class="xyz.javanew.interceptor.MenuInterceptor"></bean>
+			<bean class="com.expert.interceptor.MenuInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
@@ -51,7 +51,7 @@
          <property name="order" value="1"></property>
     </bean>
     
-	<bean id="multipartResolver" class="xyz.javanew.service.CustomMultipartResolver">
+	<bean id="multipartResolver" class="com.expert.service.CustomMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8" />
 		<!-- 指定所上传文件的总大小不能超过50M......注意maxUploadSize属性的限制不是针对单个文件,而是所有文件的容量之和 -->
 		<property name="maxUploadSize" value="1000000000"/>
